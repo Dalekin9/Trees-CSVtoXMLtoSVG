@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:annotation>
+    <xsd:documentation xml:lang="fr">
+      Schéma XML pour forum.xml
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:element name="tree">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="node" type="node"/>
+            </xsd:sequence>
+        </xsd:complexType>
+  </xsd:element>
+
+    <xsd:complexType name ="node">
+
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="node" type="node"/>
+        </xsd:sequence>
+
+        <xsd:attribute name="id" type="xsd:int"/>
+        <xsd:attribute name="name" type="xsd:string"/>
+
+    </xsd:complexType>
+
+</xsd:schema>
