@@ -161,6 +161,8 @@ public class CSVtoXML {
         Element node = newDoc.createElement("node");
         node.setAttribute("id", rowValues[0]);
         node.setAttribute("name",rowValues[1]);
+        node.setAttribute("profondeur", "0");
+
         rootElement.appendChild(node);
 
         elemMap.put(Integer.parseInt(rowValues[0]), node);
@@ -204,6 +206,7 @@ public class CSVtoXML {
                 parentID = Integer.parseInt(rowValues[0]);
                 childID = Integer.parseInt(rowValues[1]);
                 elemMap.get(parentID).appendChild(elemMap.get(childID));
+                elemMap.get(childID).setAttribute("profondeur", String.valueOf(1+Integer.parseInt(elemMap.get(parentID).getAttribute("profondeur"))));
             }
             line++;
         }
