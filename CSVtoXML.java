@@ -192,7 +192,7 @@ public class CSVtoXML {
         csvReader = new BufferedReader(new FileReader(csvFileName2));
         line = 0;
         int parentID;
-        int childID;
+        int childID=0;
 
         int tempID = 0;
         int compteurlargeur = 0;
@@ -222,7 +222,7 @@ public class CSVtoXML {
                 elemMap.get(parentID).appendChild(elemMap.get(childID));
                 elemMap.get(childID).setAttribute("profondeur", String.valueOf(1+Integer.parseInt(elemMap.get(parentID).getAttribute("profondeur"))));
 
-                if(parentID !=tempID){
+                if(parentID != tempID){
                     elemMap.get(tempID).setAttribute("largeur", String.valueOf(1+compteurlargeur));
                     compteurlargeur ++;
                 }
@@ -234,6 +234,8 @@ public class CSVtoXML {
 
             line++;
         }
+        elemMap.get(childID).setAttribute("largeur", String.valueOf(1+compteurlargeur));
+
 
 
         try {
@@ -256,5 +258,7 @@ public class CSVtoXML {
     public static void main(String[] args) throws IOException {
         CSVtoXML csvToXML = new CSVtoXML();
         csvToXML.convert("treeoflife_nodes.csv", "treeoflife_links.csv","result.xml");
+        csvToXML.convert("node_sujet_exemple.csv", "link_sujet_exemple.csv","result2.xml");
+
     }
 }
