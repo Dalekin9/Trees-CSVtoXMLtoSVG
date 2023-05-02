@@ -23,6 +23,7 @@
         <xsd:attribute name="id" type="xsd:int"/>
         <xsd:attribute name="name" type="xsd:string"/>
         <xsd:attribute name="profondeur" type="xsd:string"/>
+        <xsd:attribute name="largeur" type="xsd:string"/>
 
 
     </xsd:complexType>

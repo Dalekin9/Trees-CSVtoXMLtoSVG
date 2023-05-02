@@ -1,6 +1,7 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.swing.event.InternalFrameAdapter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -162,6 +163,7 @@ public class CSVtoXML {
         node.setAttribute("id", rowValues[0]);
         node.setAttribute("name",rowValues[1]);
         node.setAttribute("profondeur", "0");
+        node.setAttribute("largeur","0");
 
         rootElement.appendChild(node);
 
@@ -190,8 +192,12 @@ public class CSVtoXML {
         csvReader = new BufferedReader(new FileReader(csvFileName2));
         line = 0;
         int parentID;
-        int childID;
+        int childID=0;
 
+        int tempID = 0;
+        int compteurlargeur = 0;
+
+        
         while ((text = csvReader.readLine()) != null) {
 
             st = new StringTokenizer(text, ",", false);
@@ -201,15 +207,35 @@ public class CSVtoXML {
                 String next = st.nextToken();
                 rowValues[i] = next;
             }
+            if(line==1){
+                parentID = Integer.parseInt(rowValues[0]);
+                childID = Integer.parseInt(rowValues[1]);
+                tempID = childID;
+                elemMap.get(parentID).appendChild(elemMap.get(childID));
+                elemMap.get(childID).setAttribute("profondeur", String.valueOf(1+Integer.parseInt(elemMap.get(parentID).getAttribute("profondeur"))));
+                elemMap.get(parentID).setAttribute("largeur", String.valueOf(0));
 
-            if (line != 0) {
+            }
+            else if (line != 0) {
                 parentID = Integer.parseInt(rowValues[0]);
                 childID = Integer.parseInt(rowValues[1]);
                 elemMap.get(parentID).appendChild(elemMap.get(childID));
                 elemMap.get(childID).setAttribute("profondeur", String.valueOf(1+Integer.parseInt(elemMap.get(parentID).getAttribute("profondeur"))));
+
+                if(parentID != tempID){
+                    elemMap.get(tempID).setAttribute("largeur", String.valueOf(1+compteurlargeur));
+                    compteurlargeur ++;
+                }
+                else{
+                    elemMap.get(tempID).setAttribute("largeur", String.valueOf(0));
+                }
+                tempID = childID;
             }
+
             line++;
         }
+        elemMap.get(childID).setAttribute("largeur", String.valueOf(1+compteurlargeur));
+
 
 
         try {
@@ -232,5 +258,7 @@ public class CSVtoXML {
     public static void main(String[] args) throws IOException {
         CSVtoXML csvToXML = new CSVtoXML();
         csvToXML.convert("treeoflife_nodes.csv", "treeoflife_links.csv","result.xml");
+        csvToXML.convert("node_sujet_exemple.csv", "link_sujet_exemple.csv","result2.xml");
+
     }
 }
