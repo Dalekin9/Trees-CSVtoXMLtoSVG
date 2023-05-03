@@ -26,114 +26,6 @@ public class CSVtoXML {
 
     }
 
-    public int convertFile(String csvFileName, String xmlFileName) {
-
-        int rowsCount = -1;
-        try {
-            Document newDoc = domBuilder.newDocument();
-            // Root element
-            Element rootElement = newDoc.createElement("Tree");
-            newDoc.appendChild(rootElement);
-            // Read csv file
-            BufferedReader linksReader;
-            BufferedReader nodesReader;
-            linksReader = new BufferedReader(new FileReader(csvFileName));
-
-            int line = 0;
-            List<String> headers = new ArrayList<String>(2);
-
-            String text = null;
-            while ((text = linksReader.readLine()) != null) {
-
-                StringTokenizer st = new StringTokenizer(text, ",", false);
-                String[] rowValues = new String[st.countTokens()];
-                int index = 0;
-                while (st.hasMoreTokens()) {
-
-                    String next = st.nextToken();
-                    rowValues[index++] = next;
-
-                }
-
-                if (line == 0) { // Header row
-
-                    headers.addAll(Arrays.asList(rowValues));
-
-                } else { // Data row
-
-                    rowsCount++;
-
-                    Element rowElement = newDoc.createElement("row");
-                    rootElement.appendChild(rowElement);
-                    for (int col = 0; col < headers.size(); col++) {
-
-                        String header = headers.get(col);
-                        String value = null;
-
-                        if (col < rowValues.length) {
-
-                            value = rowValues[col];
-
-                        } else {
-                            // ?? Default value
-                            value = "";
-                        }
-
-                        Element curElement = newDoc.createElement(header);
-                        curElement.appendChild(newDoc.createTextNode(value));
-                        rowElement.appendChild(curElement);
-
-                    }
-
-                }
-                line++;
-
-            }
-
-            ByteArrayOutputStream baos = null;
-            OutputStreamWriter osw = null;
-
-            try {
-
-                baos = new ByteArrayOutputStream();
-                osw = new OutputStreamWriter(baos);
-
-                TransformerFactory tranFactory = TransformerFactory.newInstance();
-                Transformer aTransformer = tranFactory.newTransformer();
-                aTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                aTransformer.setOutputProperty(OutputKeys.METHOD, "xml");
-                aTransformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-
-                Source src = new DOMSource(newDoc);
-                Result result = new StreamResult(osw);
-                aTransformer.transform(src, result);
-
-                osw.flush();
-                System.out.println(baos.toString());
-
-            } catch (Exception exp) {
-                exp.printStackTrace();
-            } finally {
-                try {
-                    osw.close();
-                } catch (Exception e) {
-                }
-                try {
-                    baos.close();
-                } catch (Exception e) {
-                }
-            }
-
-            // Output to console for testing
-            // Resultt result = new StreamResult(System.out);
-
-        } catch (Exception exp) {
-            System.err.println(exp.toString());
-        }
-        return rowsCount;
-        // "XLM Document has been created" + rowsCount;
-    }
-
     public void convert(String csvFileName1, String csvFileName2, String outFileName) throws IOException {
         Document newDoc = domBuilder.newDocument();
         // Root element
@@ -257,8 +149,8 @@ public class CSVtoXML {
 
     public static void main(String[] args) throws IOException {
         CSVtoXML csvToXML = new CSVtoXML();
-        csvToXML.convert("treeoflife_nodes.csv", "treeoflife_links.csv","result.xml");
-        csvToXML.convert("node_sujet_exemple.csv", "link_sujet_exemple.csv","result2.xml");
+        csvToXML.convert("projet-xml/treeoflife_nodes.csv", "projet-xml/treeoflife_links.csv","projet-xml/result.xml");
+        csvToXML.convert("projet-xml/node_sujet_exemple.csv", "projet-xml/link_sujet_exemple.csv","projet-xml/result2.xml");
 
     }
 }
