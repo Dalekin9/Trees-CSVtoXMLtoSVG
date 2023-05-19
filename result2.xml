@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tree>
+    <node id="1" largeur="0" name="a" profondeur="0">
+        <node id="2" largeur="1" name="a" profondeur="1"/>
+        <node id="3" largeur="0" name="a" profondeur="1">
+            <node id="4" largeur="0" name="a" profondeur="2">
+                <node id="5" largeur="2" name="a" profondeur="3"/>
+                <node id="6" largeur="3" name="a" profondeur="3"/>
+                <node id="7" largeur="4" name="a" profondeur="3"/>
+                <node id="8" largeur="5" name="a" profondeur="3"/>
+            </node>
+            <node id="9" largeur="6" name="a" profondeur="2"/>
+            <node id="10" largeur="0" name="a" profondeur="2">
+                <node id="11" largeur="7" name="a" profondeur="3"/>
+                <node id="12" largeur="8" name="a" profondeur="3"/>
+            </node>
+            <node id="13" largeur="9" name="a" profondeur="2"/>
+            <node id="14" largeur="10" name="a" profondeur="2"/>
+        </node>
+        <node id="15" largeur="0" name="a" profondeur="1">
+            <node id="16" largeur="11" name="a" profondeur="2"/>
+            <node id="17" largeur="12" name="a" profondeur="2"/>
+            <node id="18" largeur="0" name="a" profondeur="2">
+                <node id="19" largeur="13" name="a" profondeur="3"/>
+                <node id="20" largeur="14" name="a" profondeur="3"/>
+                <node id="21" largeur="15" name="a" profondeur="3"/>
+                <node id="22" largeur="16" name="a" profondeur="3"/>
+                <node id="23" largeur="17" name="a" profondeur="3"/>
+            </node>
+            <node id="24" largeur="18" name="a" profondeur="2"/>
+        </node>
+        <node id="25" largeur="0" name="a" profondeur="1">
+            <node id="26" largeur="19" name="a" profondeur="2"/>
+            <node id="27" largeur="20" name="a" profondeur="2"/>
+            <node id="28" largeur="21" name="a" profondeur="2"/>
+            <node id="29" largeur="22" name="a" profondeur="2"/>
+        </node>
+    </node>
+</tree>

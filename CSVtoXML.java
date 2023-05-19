@@ -149,8 +149,8 @@ public class CSVtoXML {
 
     public static void main(String[] args) throws IOException {
         CSVtoXML csvToXML = new CSVtoXML();
-        csvToXML.convert("projet-xml/treeoflife_nodes.csv", "projet-xml/treeoflife_links.csv","projet-xml/result.xml");
-        csvToXML.convert("projet-xml/node_sujet_exemple.csv", "projet-xml/link_sujet_exemple.csv","projet-xml/result2.xml");
+        csvToXML.convert("treeoflife_nodes.csv", "treeoflife_links.csv","result.xml");
+        csvToXML.convert("node_sujet_exemple.csv", "link_sujet_exemple.csv","result2.xml");
 
     }
 }
