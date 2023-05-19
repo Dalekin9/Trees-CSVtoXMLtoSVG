@@ -17,31 +17,21 @@
             <xsl:apply-templates select="@* | node()"/>
         </xsl:copy>
         
-        <xsl:call-template name="width_line">
+        <xsl:apply-templates select="tree//node/@largeur">
             <xsl:with-param name="profondeur" select="$maxDepth - 1"/>
-        </xsl:call-template>
+        </xsl:apply-templates>
         
     </xsl:template>
 
-    <xsl:template match="node()|@*">
-        <xsl:copy>
-            <xsl:apply-templates select="node()|@*"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template name="width_line">
-        <xsl:param name="profondeur" as="xsd:integer"/>
+     <xsl:template name="width_line" match="@largeur[parent::node]">
+        <xsl:param name="profondeur" select="$maxDepth - 1" as="xsd:integer"/>
 
-        <xsl:if test="number($profondeur) ge 0">
-            <xsl:for-each select="tree//node">
-                <xsl:if test="number(@profondeur) eq $profondeur">
-                    <xsl:attribute name="largeur">
-                        <xsl:value-of select="self[parent::*[1][@largeur]]"/>
-                    </xsl:attribute>
-                    <xsl:copy>cacaca
-                    </xsl:copy>
-                </xsl:if>
-            </xsl:for-each>
+        <xsl:if test="$profondeur ge 0">
+            <xsl:if test="number(.[parent::*[@profondeur]]) eq $profondeur">
+                <xsl:attribute name="largeur">
+                    <xsl:value-of select="self[1][@largeur]"/>
+                </xsl:attribute>
+            </xsl:if>
             
             <xsl:copy>CA
             </xsl:copy>
@@ -51,6 +41,12 @@
         </xsl:if>
 
 
+    </xsl:template>
+
+    <xsl:template match="node()|@*">
+        <xsl:copy>
+            <xsl:apply-templates select="node()|@*"/>
+        </xsl:copy>
     </xsl:template>
 
 </xsl:transform>
