@@ -2,17 +2,8 @@
 <xsl:transform version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/1999/xhtml" xmlns:exsl="http://exslt.org/common">
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:variable name = "maxDepth" as="xsd:integer">
-        <xsl:for-each select = "tree//node">
-            <xsl:sort select = "@profondeur" data-type = "number" order = "descending"/>
-            <xsl:if test = "position() = 1">
-                <xsl:value-of select = "@profondeur"/>
-            </xsl:if>
-        </xsl:for-each>
-    </xsl:variable>
-
     <xsl:template match="/">
-            <xsl:apply-templates select="*"/>
+        <xsl:apply-templates select="*"/>
     </xsl:template>
 
     <xsl:template match="node">
