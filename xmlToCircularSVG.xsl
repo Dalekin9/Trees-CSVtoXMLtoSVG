@@ -48,12 +48,30 @@
         y2="{math:sin( (./@largeur - 1) * $ecartAngle +math:pi()) * ($longueurTrait * (./@profondeur + 1))  + 500}" 
         style="stroke-width:10;stroke:yellow;"/>
 
-        <!--<path d="M {500 + math:cos(./node[1]/@largeur * $ecartAngle))* $longueurTrait * (./@profondeur + 1)}
-                   {500 + math:sin(./node[1]/@largeur * $ecartAngle +math:pi())* $longueurTrait * (./@profondeur + 1)} 
+        <xsl:choose>
+            <xsl:when test="./node[last()]/@largeur - ./node[1]/@largeur gt $maxLargeur div 2">
+             
+             <path d="M {500 + math:cos((./node[1]/@largeur -1) * $ecartAngle)* $longueurTrait * (./@profondeur + 1)}
+                   {500 + math:sin((./node[1]/@largeur -1) * $ecartAngle +math:pi())* $longueurTrait * (./@profondeur + 1)} 
                  A {(./@profondeur + 1) * $longueurTrait} {(./@profondeur + 1) * $longueurTrait} 0 1 0
-                    {500 + math:cos(./node[last()]/@largeur * $ecartAngle) * $longueurTrait * (./@profondeur + 1)} 
-                    {500 + math:sin(./node[last()]/@largeur * $ecartAngle +math:pi()) * $longueurTrait * (./@profondeur + 1)}"/>
-    -->
+                    {500 + math:cos((./node[last()]/@largeur -1) * $ecartAngle) * $longueurTrait * (./@profondeur + 1)} 
+                    {500 + math:sin((./node[last()]/@largeur -1) * $ecartAngle +math:pi()) * $longueurTrait * (./@profondeur + 1)
+                    }"
+                    style="stroke: red; fill:none;stroke-width:3;"/>
+            </xsl:when>
+        
+            <xsl:otherwise>
+            <path d="M {500 + math:cos((./node[1]/@largeur -1) * $ecartAngle)* $longueurTrait * (./@profondeur + 1)}
+                   {500 + math:sin((./node[1]/@largeur -1) * $ecartAngle +math:pi())* $longueurTrait * (./@profondeur + 1)} 
+                 A {(./@profondeur + 1) * $longueurTrait} {(./@profondeur + 1) * $longueurTrait} 0 0 0
+                    {500 + math:cos((./node[last()]/@largeur -1) * $ecartAngle) * $longueurTrait * (./@profondeur + 1)} 
+                    {500 + math:sin((./node[last()]/@largeur -1) * $ecartAngle +math:pi()) * $longueurTrait * (./@profondeur + 1)
+                    }"
+                    style="stroke: red; fill:none;stroke-width:3;"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    
     </xsl:template>
 
     <xsl:template match="node">        
