@@ -41,35 +41,35 @@
     </xsl:template>
 
     <xsl:template match="node[node]">
-        <line x1="{((math:cos((./@largeur - 1) * $ecartAngle) * 180) div math:pi())* ($longueurTrait * ./@profondeur) + 250}" 
-        y1="{((math:sin((./@largeur - 1) * $ecartAngle) * 180) div math:pi())* ($longueurTrait * ./@profondeur)  + 250}" 
-        x2="{((math:cos((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * (./@profondeur + 1))  + 250}" 
-        y2="{((math:sin((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * (./@profondeur + 1))  + 250}" 
-        style="stroke-width:10;stroke:black;"/>
+        <line 
+        x1="{math:cos((./@largeur - 1) * $ecartAngle)* ($longueurTrait * ./@profondeur) + 500}" 
+        y1="{math:sin((./@largeur - 1) * $ecartAngle +math:pi())* ($longueurTrait * ./@profondeur)  + 500}" 
+        x2="{math:cos((./@largeur - 1) * $ecartAngle) * ($longueurTrait * (./@profondeur + 1))  + 500}" 
+        y2="{math:sin((./@largeur - 1) * $ecartAngle +math:pi()) * ($longueurTrait * (./@profondeur + 1))  + 500}" 
+        style="stroke-width:10;stroke:yellow;"/>
 
-        <!--<path d="M {250 + ((math:cos(./node[1]/@largeur * $ecartAngle) * 180) div math:pi() )* $longueurTrait * (./@profondeur + 1)}
-                   {250 + ((math:sin(./node[1]/@largeur * $ecartAngle) * 180) div math:pi())* $longueurTrait * (./@profondeur + 1)} 
+        <!--<path d="M {500 + math:cos(./node[1]/@largeur * $ecartAngle))* $longueurTrait * (./@profondeur + 1)}
+                   {500 + math:sin(./node[1]/@largeur * $ecartAngle +math:pi())* $longueurTrait * (./@profondeur + 1)} 
                  A {(./@profondeur + 1) * $longueurTrait} {(./@profondeur + 1) * $longueurTrait} 0 1 0
-                    {250 + ((math:cos(./node[last()]/@largeur * $ecartAngle) * 180) div math:pi()) * $longueurTrait * (./@profondeur + 1)} 
-                    {250 + ((math:sin(./node[last()]/@largeur * $ecartAngle) * 180) div math:pi()) * $longueurTrait * (./@profondeur + 1)}"/>
+                    {500 + math:cos(./node[last()]/@largeur * $ecartAngle) * $longueurTrait * (./@profondeur + 1)} 
+                    {500 + math:sin(./node[last()]/@largeur * $ecartAngle +math:pi()) * $longueurTrait * (./@profondeur + 1)}"/>
     -->
     </xsl:template>
 
-    <xsl:template match="node">
+    <xsl:template match="node">        
+         <line x1="{math:cos((./@largeur - 1) * $ecartAngle) * ($longueurTrait * ./@profondeur) + 500}" 
+         y1="{math:sin((./@largeur - 1) * $ecartAngle +math:pi()) * ($longueurTrait * ./@profondeur) + 500}" 
+         x2="{math:cos((./@largeur - 1) * $ecartAngle) * ($longueurTrait * (./@profondeur + 1)) + 500}" 
+         y2="{math:sin((./@largeur - 1) * $ecartAngle +math:pi()) * ($longueurTrait * (./@profondeur + 1)) + 500}" 
+         style="stroke-width:10;stroke:blue;"/>
 
-        
-         <line x1="{((math:cos((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * ./@profondeur) + 250}" 
-         y1="{((math:sin((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * ./@profondeur) + 250}" 
-         x2="{((math:cos((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * (./@profondeur + 1)) + 250}" 
-         y2="{((math:sin((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * (./@profondeur + 1)) + 250}" 
-         style="stroke-width:10;stroke:black;"/>
+        <xsl:if test="$maxDepth ge number(@profondeur)">
 
-        <xsl:if test="number(@profondeur) lt $maxDepth">
-
-        <line x1="{((math:cos((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait *  (./@profondeur + 1)) + 250}" 
-         y1="{((math:sin((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * (./@profondeur + 1)) + 250}" 
-         x2="{((math:cos((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * ($maxDepth - ./@profondeur)) + 250}" 
-         y2="{((math:sin((./@largeur - 1) * $ecartAngle) * 180) div math:pi()) * ($longueurTrait * ($maxDepth - ./@profondeur)) + 250}" 
+        <line 
+         x1="{math:cos((./@largeur - 1) * $ecartAngle) * ($longueurTrait *  (./@profondeur + 1)) + 500}" 
+         y1="{math:sin((./@largeur - 1) * $ecartAngle +math:pi()) * ($longueurTrait * (./@profondeur + 1)) + 500}" 
+         x2="{math:cos((./@largeur - 1) * $ecartAngle) * ($longueurTrait * ($maxDepth+1)) + 500}" 
+         y2="{math:sin((./@largeur - 1) * $ecartAngle +math:pi()) * ($longueurTrait * ($maxDepth+1)) + 500}" 
          style="stroke-width:10;stroke:red;"/>
 
         </xsl:if>
