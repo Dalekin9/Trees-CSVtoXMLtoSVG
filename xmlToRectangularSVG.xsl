@@ -53,12 +53,12 @@
         y2="{(number(@profondeur) + 1) * $ecartProf}"
         style="stroke:black;stroke-width:2;"/>
 
-        <xsl:if test="number((@profondeur +1)*$ecartProf) lt 1000">
+        <xsl:if test="$maxDepth gt number(@profondeur)">
 
         <line x1="{@largeur * $ecartLarg}" 
         y1="{(@profondeur + 1) * $ecartProf}" 
         x2="{@largeur * $ecartLarg}" 
-        y2="{1000}" 
+        y2="{($maxDepth +1)* $ecartProf}" 
         style="stroke:red;stroke-width:2;"
         stroke-dasharray="5,5"/>
 
