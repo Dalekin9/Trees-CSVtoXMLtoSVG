@@ -59,7 +59,7 @@
         y1="{(@profondeur + 1) * $ecartProf}" 
         x2="{@largeur * $ecartLarg}" 
         y2="{($maxDepth +1)* $ecartProf}" 
-        style="stroke:red;stroke-width:2;"
+        style="stroke:black;stroke-width:2;"
         stroke-dasharray="5,5"/>
 
         </xsl:if>

@@ -26,6 +26,8 @@ public class CSVtoXML {
 
     }
 
+    // 1er arg : fichier nodes
+    // 2ème arg : fichier links
     public void convert(String csvFileName1, String csvFileName2, String outFileName) throws IOException {
         Document newDoc = domBuilder.newDocument();
         // Root element
@@ -149,8 +151,9 @@ public class CSVtoXML {
 
     public static void main(String[] args) throws IOException {
         CSVtoXML csvToXML = new CSVtoXML();
-        csvToXML.convert("treeoflife_nodes.csv", "treeoflife_links.csv","result.xml");
-        csvToXML.convert("node_sujet_exemple.csv", "link_sujet_exemple.csv","result2.xml");
-
+        //Conversion du fichier donné dans le sujet
+        csvToXML.convert("treeoflife_nodes.csv", "treeoflife_links.csv", "xmlFromCSV.xml");
+        //Conversion de l'arbre représenté en page 2 du sujet
+        csvToXML.convert("node_sujet_exemple.csv", "link_sujet_exemple.csv","xmlFromCSV2.xml");
     }
 }
