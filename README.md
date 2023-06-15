@@ -1,7 +1,4 @@
-## Projet xml
-    TORIS Ugo 21957683
-    CAI Thierry 21960470
-
+# Projet Format de Document et XML ( M1 2022 - 2023 )
 ## Utilisation
 
     Extracteur:
